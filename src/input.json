@@ -1,0 +1,99 @@
+{
+  "sections": [
+    {
+      "sectionId": "078ea998-0130-4d8e-9edc-4f8ba33f061c",
+      "sectionType": "WELCOME",
+      "welcomeText": "Thanks for taking time to fill the product feedback.",
+      "startText": "START"
+    },
+    {
+      "sectionId": "078ea998-0130-4d8e-9edc-4f8ba33f061c",
+      "sectionType": "QUESTIONS",
+      "questions": [
+        {
+          "questionId": "279bc43a-86c6-469f-8ce1-063eb227fa49",
+          "question": "Do you like the product A",
+          "questionType": "SINGLE_SELECT",
+          "options": [
+            {
+              "optionId": "5712577e-87fb-11eb-8dcd-0242ac130003",
+              "text": "YES"
+            },
+            {
+              "optionId": "57124f9a-87fb-11eb-8dcd-0242ac130003",
+              "text": "NO"
+            }
+          ]
+        },
+        {
+          "questionId": "571256ca-87fb-11eb-8dcd-0242ac130003",
+          "question": "On a scale of 1 to 4, how well did you like the product?",
+          "questionType": "SINGLE_SELECT",
+          "options": [
+            {
+              "optionId": "57125210-87fb-11eb-8dcd-0242ac130003",
+              "text": 1
+            },
+            {
+              "optionId": "57125210-87fb-12eb-8dcd-0242ac130003",
+              "text": 2
+            },
+            {
+              "optionId": "57125210-87fb-13eb-8dcd-0242ac130003",
+              "text": 3
+            },
+            {
+              "optionId": "57125210-87fb-14eb-8dcd-0242ac130003",
+              "text": 4
+            }
+          ]
+        },
+        {
+          "questionId": "571256cb-87fb-11eb-8dcd-0242ac130003",
+          "question": "Did our product meet your goals?",
+          "questionType": "SINGLE_SELECT",
+          "options": [
+            {
+              "optionId": "57125210-87fb-11eb-8dcd-0242ac130003",
+              "text": "Somewhat agree"
+            },
+            {
+              "optionId": "57125210-87fb-12eb-8dcd-0242ac130003",
+              "text": "Agree"
+            },
+            {
+              "optionId": "57125210-87fb-12eb-8dcd-0242ac130003",
+              "text": "Very much agree"
+            }
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "questionId": "279bc43a-86c6-469f-8ce1-063eb227fa49",
+          "optionId": "5712577e-87fb-11eb-8dcd-0242ac130003",
+          "nextQuestion": "571256ca-87fb-11eb-8dcd-0242ac130003"
+        },
+        {
+          "questionId": "571256cb-87fb-11eb-8dcd-0242ac130003",
+          "nextQuestion": -1
+        },
+        {
+          "questionId": "571256ca-87fb-11eb-8dcd-0242ac130003",
+          "optionId": "57125210-87fb-11eb-8dcd-0242ac130003",
+          "nextQuestion": "571256cb-87fb-11eb-8dcd-0242ac130003"
+        },
+        {
+          "questionId": "571256cb-87fb-11eb-8dcd-0242ac130003",
+          "optionId": "57125210-87fb-11eb-8dcd-0242ac130003",
+          "nextQuestion": "571256ca-87fb-11eb-8dcd-0242ac130003"
+        },
+        {
+          "questionId": "279bc43a-86c6-469f-8ce1-063eb227fa49",
+          "optionId": "57124f9a-87fb-11eb-8dcd-0242ac130003",
+          "nextQuestion": -1
+        }
+      ]
+    }
+  ]
+}

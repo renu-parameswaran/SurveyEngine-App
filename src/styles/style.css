@@ -1,0 +1,230 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: black;
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  /* background: #ffffff; */
+  background: linear-gradient(to bottom, #ffffff 0%, #e1e8ed 100%);
+}
+
+header {
+  min-height: 30vh;
+  font-family: "Kaushan Script", cursive;
+  font-size: 4em;
+  letter-spacing: 3px;
+  display: flex;
+  margin-bottom: 30px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+form {
+  min-height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header1 {
+  padding: 30px;
+  text-align: center;
+  background-image: linear-gradient(120deg, #4cb8c4, #3cd3ad);
+  color: white;
+  font-size: 1rem;
+  min-width: 20px;
+}
+
+#description {
+  margin-top: 2.5rem;
+  text-align: center;
+  font-size: 1em;
+}
+
+div {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+}
+
+.flex-container {
+  display: flex;
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-container > div {
+  background-color: #f1f1f1;
+  min-width: 200px;
+  min-height: 400px;
+  font-size: 5px;
+}
+
+#welcomemsg {
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 1rem;
+  color: rgba(82, 16, 235, 0.904);
+}
+
+#welcometext {
+  display: flex;
+  justify-content: center;
+  font-size: 1rem;
+  color: white;
+}
+
+#question1 {
+  /* display: flex; */
+  /* justify-content: center; */
+  font-size: 1.4rem;
+  color: black;
+}
+
+#hidden {
+  background-image: linear-gradient(120deg, #4cb8c4, #3cd3ad);
+  /* text-align: center; */
+  font-weight: bold;
+  display: block;
+  min-height: 100vh;
+}
+
+#questionsPage {
+  /* text-align: center; */
+  font-weight: bold;
+  display: none;
+  min-height: 100vh;
+}
+
+#thankYouPage {
+  /* text-align: center; */
+  font-weight: bold;
+  display: none;
+  min-height: 100vh;
+}
+
+.button {
+  display: flex;
+  margin-top: 50px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding: 10px 25px;
+  font-size: 18px;
+  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #6fc6cf;
+  border: none;
+  border-radius: 15px;
+}
+
+.button:hover {
+  background-color: #3596a0;
+}
+
+#survey-form {
+  margin: auto;
+  margin-top: 7rem;
+  /* justify-content: center; */
+  margin-bottom: 2.8rem;
+  padding: 0 1.5rem;
+  max-width: 35rem;
+  font-size: 1rem;
+  /* background-color: #dff5f3; */
+}
+#survey-form div {
+  margin-top: 1.8rem;
+}
+
+.list-items {
+  list-style: none;
+}
+.input-elm {
+  margin-top: 1rem;
+  width: 100%;
+  height: 2rem;
+  background-color: transparent;
+  border-bottom: 0.1rem dotted #ffffff;
+  font-size: 1.1rem;
+}
+.input-radio,
+.input-checkbox {
+  margin-top: 1.55rem;
+  margin-bottom: 1.55rem;
+  width: 2rem;
+  height: 1.15rem;
+  vertical-align: middle;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 700px;
+  padding: 15px 10px 20px 20px;
+  /* text-align: center; */
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  padding: 2px 16px;
+  display: block;
+}
+
+.boxcontainer {
+  padding: 5px 5px 5px 5px;
+}
+
+.wrapper-2 p {
+  margin: 0;
+  font-size: 1.3em;
+  color: #aaa;
+  font-family: "Source Sans Pro", sans-serif;
+  letter-spacing: 1px;
+}
+
+.wrapper-1 {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.wrapper-2 {
+  padding: 10px;
+  text-align: center;
+}
+h1 {
+  font-family: "Kaushan Script", cursive;
+  font-size: 4em;
+  letter-spacing: 3px;
+  color: #6fc6cf;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 600px) {
+  .content {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .wrapper-1 {
+    height: initial;
+    max-width: 620px;
+    margin: 0 auto;
+    margin-top: 300px;
+    box-shadow: 4px 8px 40px 8px rgba(88, 146, 255, 0.2);
+  }
+}

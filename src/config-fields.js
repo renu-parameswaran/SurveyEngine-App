@@ -1,0 +1,16 @@
+export const FIELD_IDS = {
+  SECTIONS: "sections",
+  SECTION_ID: "sectionId",
+  SECTION_TYPE: "sectionType",
+  WELCOME_TEXT: "welcomeText",
+  START_TEXT: "startText",
+  QUESTIONS: "questions",
+  QUESTION_ID: "questionId",
+  QUESTION: "question",
+  QUESTION_TYPE: "questionType",
+  OPTIONS: "options",
+  OPTION_ID: "optionId",
+  TEXT: "text",
+  CONDITIONS: "conditions",
+  NEXT_QUESTION: "nextQuestion",
+};

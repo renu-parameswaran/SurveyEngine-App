@@ -174,7 +174,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(ROOT_DIRECTORY, 'src/index.html'),
+      template: path.resolve(ROOT_DIRECTORY, 'src/views/index.html'),
       filename: 'index.html',
     }),
   ],
