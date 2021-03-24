@@ -1,4 +1,4 @@
-export const FIELD_IDS = {
+export const CONFIG_JSON_KEYS = {
   SECTIONS: "sections",
   SECTION_ID: "sectionId",
   SECTION_TYPE: "sectionType",

@@ -12,7 +12,7 @@
       "questions": [
         {
           "questionId": "279bc43a-86c6-469f-8ce1-063eb227fa49",
-          "question": "Do you like the product A",
+          "question": "Do you like the product A?",
           "questionType": "SINGLE_SELECT",
           "options": [
             {
@@ -62,7 +62,7 @@
               "text": "Agree"
             },
             {
-              "optionId": "57125210-87fb-12eb-8dcd-0242ac130003",
+              "optionId": "57125210-87fb-13eb-8dcd-0242ac130003",
               "text": "Very much agree"
             }
           ]
