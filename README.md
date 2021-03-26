@@ -12,7 +12,7 @@ To run this locally:
 
 ## Assignment- 1
 
-Survey engine.
+To build a Survey engine.
 
 Assignment:
 
