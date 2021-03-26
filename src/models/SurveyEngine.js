@@ -17,49 +17,43 @@ let surveyWelcomeObj,
 export default class SurveyEngine {
   constructor(config) {
     this.config = config;
-    this.data = new WeakMap();
-    this.data.set(this, {
-      welcomeSection: {},
-      questionsSection: {},
-      outputlogs: {},
-    });
+    this.welcomeSection = "";
+    this.questionsSection = "";
+    this.outputlogs = {};
   }
 
   init() {
     // form the welcome screen or question screen based
     // on the config JSON provided.
-    const data = this.data.get(this);
-    let welcomeSection = data.welcomeSection;
-    let questionsSection = data.questionsSection;
-    let outputlogs = data.outputlogs;
 
-    welcomeSection = filterFunction(this.config[fields["SECTIONS"]], "WELCOME");
+    this.welcomeSection = filterFunction(
+      this.config[fields["SECTIONS"]],
+      "WELCOME"
+    );
 
-    questionsSection = filterFunction(
+    this.questionsSection = filterFunction(
       this.config[fields["SECTIONS"]],
       "QUESTIONS"
     );
 
-    this.data.set({ welcomeSection, questionsSection });
-
     // initializing class instances
-    surveyWelcomeObj = new SurveyWelcome(welcomeSection);
-    surveyQuestionObj = new SurveyQuestion(questionsSection);
-    surveyThankyouObj = new SurveyThankyou(outputlogs);
-    SurveyAnswersObj = new SurveyAnswers(outputlogs);
+    surveyWelcomeObj = new SurveyWelcome(this.welcomeSection);
+    surveyQuestionObj = new SurveyQuestion(this.questionsSection);
+    surveyThankyouObj = new SurveyThankyou(this.outputlogs);
+    SurveyAnswersObj = new SurveyAnswers(this.outputlogs);
 
-    _isEmpty(welcomeSection)
+    _isEmpty(this.welcomeSection)
       ? surveyQuestionObj.showQuestionsPage("", this.displayThankyouPage)
       : surveyWelcomeObj.showWelcomePage();
 
     // on click of start survey button from welcome page
     document.getElementById("elem").onclick = function () {
-      _isEmpty(questionsSection)
+      _isEmpty(this.questionsSection)
         ? surveyQuestionObj.showQuestionsPage("", this.displayThankyouPage)
         : surveyQuestionObj.showQuestionsPage();
     }.bind(this);
 
-    eventListenerHelper(this.getNextQuestion, questionsSection);
+    eventListenerHelper(this.getNextQuestion, this.questionsSection);
   }
 
   async getNextQuestion(nextQuestionId) {
