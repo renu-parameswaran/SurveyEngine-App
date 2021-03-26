@@ -1,7 +1,6 @@
 import "./styles/style.css";
 import SurveyEngine from "./models/SurveyEngine.js";
 import config_json from "./input.json";
-const _ = require("lodash");
 
 window.onload = getSurveyConfig(config_json);
 

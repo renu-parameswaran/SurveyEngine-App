@@ -1,42 +1,86 @@
-import { _isEmpty } from "lodash/isEmpty";
-import { _filter } from "lodash/filter";
-import { _upperCase } from "lodash/upperCase";
+import _isEmpty from "lodash/isEmpty";
 import { CONFIG_JSON_KEYS as fields } from "../constants/config-fields.js";
 import SurveyWelcome from "./SurveyWelcome.js";
 import SurveyQuestion from "./SurveyQuestion.js";
+import filterFunction from "../helpers/filterFunction.js";
+import eventListenerHelper from "../helpers/eventListenerHelper.js";
+import sleep from "../helpers/waitHelper.js";
+import SurveyThankyou from "./SurveyThankyou.js";
+import SurveyAnswers from "./SurveyAnswers.js";
+
+// declaring object variables
+let surveyWelcomeObj,
+  surveyQuestionObj,
+  surveyThankyouObj,
+  SurveyAnswersObj = "";
 
 export default class SurveyEngine {
   constructor(config) {
     this.config = config;
+    this.data = new WeakMap();
+    this.data.set(this, {
+      welcomeSection: {},
+      questionsSection: {},
+      outputlogs: {},
+    });
   }
 
   init() {
     // form the welcome screen or question screen based
     // on the config JSON provided.
+    const data = this.data.get(this);
+    let welcomeSection = data.welcomeSection;
+    let questionsSection = data.questionsSection;
+    let outputlogs = data.outputlogs;
 
-    let welcomeSection = _.filter(
+    welcomeSection = filterFunction(this.config[fields["SECTIONS"]], "WELCOME");
+
+    questionsSection = filterFunction(
       this.config[fields["SECTIONS"]],
-      function (obj1) {
-        return _.upperCase(obj1[fields.SECTION_TYPE]) === "WELCOME";
-      }
-    );
-    let questionsSection = _.filter(
-      this.config[fields["SECTIONS"]],
-      function (obj2) {
-        return _.upperCase(obj2[fields.SECTION_TYPE]) === "QUESTIONS";
-      }
+      "QUESTIONS"
     );
 
-    const surveyWelcomeObj = new SurveyWelcome(welcomeSection);
-    const surveyQuestionObj = new SurveyQuestion(questionsSection);
+    this.data.set({ welcomeSection, questionsSection });
 
-    _.isEmpty(welcomeSection)
-      ? surveyQuestionObj.showQuestionsPage()
+    // initializing class instances
+    surveyWelcomeObj = new SurveyWelcome(welcomeSection);
+    surveyQuestionObj = new SurveyQuestion(questionsSection);
+    surveyThankyouObj = new SurveyThankyou(outputlogs);
+    SurveyAnswersObj = new SurveyAnswers(outputlogs);
+
+    _isEmpty(welcomeSection)
+      ? surveyQuestionObj.showQuestionsPage("", this.displayThankyouPage)
       : surveyWelcomeObj.showWelcomePage();
 
     // on click of start survey button from welcome page
     document.getElementById("elem").onclick = function () {
-      surveyQuestionObj.showQuestionsPage();
-    };
+      _isEmpty(questionsSection)
+        ? surveyQuestionObj.showQuestionsPage("", this.displayThankyouPage)
+        : surveyQuestionObj.showQuestionsPage();
+    }.bind(this);
+
+    eventListenerHelper(this.getNextQuestion, questionsSection);
+  }
+
+  async getNextQuestion(nextQuestionId) {
+    await sleep(400);
+    //0.4 seconds later...
+    // to get question id and option id from the event
+    let output_ids = localStorage.getItem("event").split(",");
+    // calling collectAnswers to store and finally display all the id's selected
+    SurveyAnswersObj.collectAnswers(output_ids[0], output_ids[1]);
+    // to hide and remove previous node
+    let elemt = document.getElementById("containerdiv");
+    elemt.parentNode.removeChild(elemt);
+
+    if (nextQuestionId == -1) {
+      surveyThankyouObj.dispThankyouPage();
+    } else {
+      surveyQuestionObj.showQuestionsPage(nextQuestionId);
+    }
+  }
+
+  displayThankyouPage() {
+    surveyThankyouObj.dispThankyouPage();
   }
 }

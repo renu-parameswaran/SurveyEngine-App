@@ -1,7 +1,5 @@
 import { CONFIG_JSON_KEYS as fields } from "../constants/config-fields.js";
-import SurveyQuestion from "../models/SurveyQuestion.js";
-
-export function buildOneQuestionElement(questionsArray, questionSection) {
+export default function buildOneQuestionElement(questionsArray) {
   let element = document.getElementById("cardelement");
 
   // Create an unordered list
@@ -19,6 +17,7 @@ export function buildOneQuestionElement(questionsArray, questionSection) {
   let p_element = document.createElement("p");
   p_element.classList.add("boxcontainer");
   p_element.setAttribute("id", "pelement");
+  p_element.setAttribute("data-id", "question");
 
   p_element.textContent = questionsArray[fields.QUESTION];
 
@@ -27,13 +26,13 @@ export function buildOneQuestionElement(questionsArray, questionSection) {
   let counter = 1;
   questionsArray.options.forEach(function (options_list) {
     var li = document.createElement("li");
-
     li.classList.add("list-items");
     li.setAttribute("id", "list" + counter);
     let ops = document.createElement("input");
     ops.classList.add("input-elm", "input-radio");
     ops.setAttribute("type", "radio");
     ops.setAttribute("name", "options");
+    ops.setAttribute("data-type", "option");
     ops.setAttribute(
       "value",
       questionsArray[fields.QUESTION_ID] + "," + options_list[fields.OPTION_ID]
@@ -60,15 +59,4 @@ export function buildOneQuestionElement(questionsArray, questionSection) {
   // Inject into the DOM
   let app = document.querySelector("#survey-form");
   app.appendChild(element);
-
-  document.querySelectorAll("input[name='options']").forEach((input) => {
-    input.addEventListener("change", handleClick);
-  });
-
-  // to handle onClick events in inout button element
-  function handleClick(event) {
-    let idArray = event.target.value.split(",");
-    const SurveyQuestionObj = new SurveyQuestion(questionSection);
-    SurveyQuestionObj.getNextQuestion(idArray[0], idArray[1], questionSection);
-  }
 }

@@ -1,13 +1,14 @@
 import { CONFIG_JSON_KEYS as fields } from "../constants/config-fields.js";
-import { _forIn } from "lodash/forIn";
-import { _isObject } from "lodash/isObject";
+import _forIn from "lodash/forIn";
+import _isObject from "lodash/isObject";
+import _isEmpty from "lodash/isEmpty";
 
-export function traverseObject(obj, field) {
+export default function traverseObject(obj, field) {
   let resultsArray = "";
-  _.forIn(obj, function (val, key1) {
-    if (_.isObject(val)) {
-      _.forIn(val, function (el, key2) {
-        if (_.isObject(el)) {
+  _forIn(obj, function (val, key1) {
+    if (_isObject(val)) {
+      _forIn(val, function (el, key2) {
+        if (_isObject(el)) {
           if (
             key2 === field &&
             (key2 === fields.QUESTIONS || key2 === fields.CONDITIONS)
@@ -18,7 +19,7 @@ export function traverseObject(obj, field) {
         }
       });
     }
-    if (_.isObject(key1)) {
+    if (_isObject(key1)) {
       traverseObject(obj[key1]);
     }
   });
