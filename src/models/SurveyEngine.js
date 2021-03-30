@@ -7,6 +7,7 @@ import eventListenerHelper from "../helpers/eventListenerHelper.js";
 import sleep from "../helpers/waitHelper.js";
 import SurveyThankyou from "./SurveyThankyou.js";
 import SurveyAnswers from "./SurveyAnswers.js";
+import getNextQuestionIdHelper from "../helpers/getNextQuestionIdHelper.js";
 
 // declaring object variables
 let surveyWelcomeObj,
@@ -53,16 +54,25 @@ export default class SurveyEngine {
         : surveyQuestionObj.showQuestionsPage();
     }.bind(this);
 
-    eventListenerHelper(this.getNextQuestion, this.questionsSection);
+    eventListenerHelper(this.getNextQuestion.bind(this));
   }
 
-  async getNextQuestion(nextQuestionId) {
+  async getNextQuestion() {
     await sleep(400);
     //0.4 seconds later...
     // to get question id and option id from the event
     let output_ids = localStorage.getItem("event").split(",");
+    let question_id = output_ids[0];
+    let option_id = output_ids[1];
     // calling collectAnswers to store and finally display all the id's selected
-    SurveyAnswersObj.collectAnswers(output_ids[0], output_ids[1]);
+    SurveyAnswersObj.collectAnswers(question_id, option_id);
+    // to get next question id
+    let nextQuestionId = getNextQuestionIdHelper(
+      question_id,
+      option_id,
+      this.questionsSection
+    );
+
     // to hide and remove previous node
     let elemt = document.getElementById("containerdiv");
     elemt.parentNode.removeChild(elemt);

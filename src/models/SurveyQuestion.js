@@ -9,19 +9,16 @@ import _forIn from "lodash/forIn";
 export default class SurveyQuestion {
   constructor(questionsSection) {
     this.questionsSection = questionsSection;
-    this.data = new WeakMap();
-    this.data.set(this, {
-      questionsArray: {},
-    });
+    this.questionsArray = {};
   }
 
   showQuestionsPage(nextQId, callback) {
-    // on click of start survey -> renders question page
-    const data = this.data.get(this);
-    let questionsArray = data.questionsArray;
-    hideFirstPageDiv();
+    // renders questions one by one on click of next options
+    let questionsArray = this.questionsArray;
+    hideFirstPageDiv(); // hide welcome page on click of start survey and renders questions
     questionsArray = traverseObject(this.questionsSection, fields.QUESTIONS);
-
+    // either populate first question or set of next questions based on conditions schema or
+    // display thank you page if the config doesn't have questions section
     if (!_isEmpty(questionsArray))
       this.populateFirstQuestionOrNextQuestion(questionsArray, nextQId);
     else callback();
@@ -30,8 +27,10 @@ export default class SurveyQuestion {
   populateFirstQuestionOrNextQuestion(arrayObj, nextQID) {
     _isEmpty(nextQID)
       ? buildOneQuestionElement(_first(arrayObj))
-      : _forIn(arrayObj, function (value, key) {
-          if (_isEmpty(nextQID)) buildOneQuestionElement(_first(arrayObj));
+      : _forIn(arrayObj, function (value) {
+          if (_isEmpty(nextQID)) {
+            buildOneQuestionElement(_first(arrayObj));
+          }
           if (value.questionId === nextQID) {
             buildOneQuestionElement(value);
           }
